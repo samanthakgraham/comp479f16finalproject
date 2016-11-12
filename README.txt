@@ -6,4 +6,4 @@ Samantha Graham
 Eric Watat Lowe
 Constantino Mamani
 
-This project implements a web crawler in Python to crawl a predefined set of links. These pages are then indexed for a sentiment analysis to be performed.
+This project uses the WebSphinx crawler to crawl a predefined set of links. These pages are then indexed for a sentiment analysis to be performed.
