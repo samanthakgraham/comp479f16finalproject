@@ -69,17 +69,22 @@ if __name__ == '__main__':
     # Now create the index
     index = {}
 
+    # Go thru all the tokens in the list
     for token, docId in tokenList:
+        # If this token isn't in the index yet
         if token not in index:
+            # Add it to the index
             index[token] = {docId: 1}
         else:
+            # If this docId isn't in the postings list for this term
             if docId not in index[token]:
+                # Add it to the postings list
                 index[token].update({docId: 1})
             else:
+                # Increment the term frequency for this term in this docId
                 index[token][docId] = index[token][docId] + 1
 
     print index
-    print len(index['oral'])
 
 
 
