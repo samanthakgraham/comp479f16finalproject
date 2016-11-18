@@ -13,9 +13,6 @@ if __name__ == '__main__':
   
     # Directory to crawl
     rootDir = './crawled_pages'
-
-    # Get stopwords
-    stopWords = importStopwords()
     
     # Instantiate the list of pages
     pageList = []
@@ -64,8 +61,3 @@ if __name__ == '__main__':
     for department, score in departmentList:
         print ("Department: " + department + " Score: " + str(score) + "")
 	
-
-
-
-
-
