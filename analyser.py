@@ -1,5 +1,5 @@
 # Project 3 Indexer
-# Author: Samantha Graham
+# Author: Constantino Mamani
 from master.afinn import Afinn# Load Afinn
 afinn = Afinn()# Initialize Afinn
 from bs4 import BeautifulSoup # Load BeautifulSoup, for parsing HTML
@@ -7,26 +7,6 @@ import nltk # Load NLTK, for tokenizing
 import string # Import string for some useful things
 import os # Import the os module, for the os.walk function
 from math import log10 # We need log for idf
-
-# "raw" index in the form { 'term' : { docId : term frequency in docId } }, for the first pass
-rawIndex = {}
-
-# The new, final index will be of the form { 'term' : { docId: tf-idf weight for this term in this docId } }
-index = {}
-
-# Imports the list of stopwords from a file and saves them in a list for future use
-def importStopwords():
-    # Instantiate list of stopwords
-    stopWords = []
-    
-    # Open file
-    stopFile = open('stopwords.txt', 'r')
-
-    # Import stopwords from file into list
-    for line in stopFile:
-        stopWords.append(line.strip())
-
-    return stopWords
 
 # Main method
 if __name__ == '__main__':    
