@@ -69,6 +69,8 @@ if __name__ == '__main__':
             scorePerLevel = 0
             scorePerDepartment = 0
             termsPerDepartement = 0
+			
+    departmentList = sorted(departmentList,key=lambda l:l[1], reverse=True)
 		
     for department, score in departmentList:
         print ("Department: " + department + " Score: " + str(score) + "")
