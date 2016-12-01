@@ -6,6 +6,7 @@ import nltk # Load NLTK, for tokenizing
 import string # Import string for some useful things
 import os # Import the os module, for the os.walk function
 from math import log10 # We need log for idf
+from collections import OrderedDict # To have an ordered dictionary
 
 # "raw" index in the form { 'term' : { docId : term frequency in docId } }, for the first pass
 rawIndex = {}
@@ -26,6 +27,19 @@ def importStopwords():
         stopWords.append(line.strip())
 
     return stopWords
+
+# Function to sort a dictionary into an OrderedDict
+def sortIndex(index):    
+    # We'll save the new index as an OrderedDict to retain the order
+    sortedIndex = OrderedDict()
+        
+    # Sort all the things
+    sortedTerms = sorted(index)
+    for term in sortedTerms:
+        sortedIndex[term] = index[term]
+
+    # Return
+    return sortedIndex
 
 # Main method
 if __name__ == '__main__':    
@@ -69,13 +83,13 @@ if __name__ == '__main__':
                     word = word.lower()
 
                     # Do a bunch of compression
-                    if word not in string.punctuation and "//www.concordia.ca" not in word and len(word) != 0 and word not in stopWords and word != 'http' and word.isalpha():
+                    if word not in string.punctuation and "//www.concordia.ca" not in word and len(word) > 2 and word not in stopWords and word != 'http' and word.isalpha():                        
                         # And put the word in our list of tokens
                         tokenList.append([word.encode('ascii', 'ignore'), docId])	
 
 	# Save the number of documents in N to avoid confusion for later
 	N = docId
-
+    
     # Go thru all the tokens in the list
     for token, doc in tokenList:
         # If this token isn't in the index yet
@@ -115,8 +129,13 @@ if __name__ == '__main__':
 			# And save it in the index
 			index[term][doc] = tfIdf
 
-#print rawIndex
-print index
+    # Sort the index
+    fullSortedDictionary = OrderedDict()
+    fullSortedDictionary = sortIndex(index)
+	
+    # Move the index into one file for searching later
+    indexFile = open('index.txt', 'wb')
+    indexFile.write(str(fullSortedDictionary))
 
 
 
